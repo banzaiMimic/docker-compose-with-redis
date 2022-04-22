@@ -1,0 +1,13 @@
+FROM node:14.0.0
+
+RUN mkdir -p /some-app
+WORKDIR /some-app
+COPY *.json /some-app/
+COPY .npmrc /some-app/
+COPY yarn.lock /some-app/
+RUN yarn
+COPY ./src ./src
+COPY ./.env.local ./.env
+
+EXPOSE 8090
+CMD ["yarn", "dev"]
